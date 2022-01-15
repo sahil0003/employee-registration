@@ -1,0 +1,12 @@
+
+src
+    >app
+        >employee-details
+                employee-details.component.ts|.html|.css
+                    >employee-details-form
+                        employee-details-form.component.ts|.html.css
+        >shared
+            employee-details-service.ts
+            employee-details-model.ts
+        app-module.ts
+    index.html
