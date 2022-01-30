@@ -1,0 +1,45 @@
+.title1 {
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    font-family: trebuchet ms;
+    color: rgb(240, 102, 102);
+    border-bottom: 2px solid red;
+    color: #f17108;
+    background: rgb(20 17 17 / 90%);
+}
+
+::placeholder {
+    color: aquamarine;
+}
+
+.main-div mat-card {
+    padding: 0px;
+}
+
+.login-form {
+    padding: 20px;
+    color: aquamarine;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+input {
+    color: aquamarine;
+}
+
+.login {
+    background-color: #d11313;
+    opacity: 0.8;
+    text-align: center;
+    color: floralwhite;
+    font-size: 25px;
+}
+
+.mat-form-field {
+    border: azure;
+}
+
+.button {
+    background-color: #d11313;
+    color: floralwhite;
+}

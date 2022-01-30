@@ -1,0 +1,23 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+    <mat-card fxFlex="25" style="background-color: rgba(0, 0, 0, 0.1); ">
+        <div style="border-radius: 5px; padding: 10px 15px;">
+            <h2 class="title1"> EMS Login</h2>
+        </div>
+        <form fxLayoutAlign="stretch" style="background-color: rgba(7, 7, 7, 0.8); border-radius: 5px;" fxLayout="column" class="login-form" novalidate #loginform="ngForm" (ngSubmit)="onSubmit(loginform)">
+
+            <mat-form-field appearance="fill">
+
+                <Label>TechM ID :</Label>
+
+                <input st matInput class="input1" type="number" placeholder="TechM Id" name="techmid" #techmid="ngModel" [(ngModel)]="service.formData.techmid" required max="999999" min="1000" [class.invalid]="techmid.invalid && techmid.touched">
+
+            </mat-form-field><br/>
+
+            <mat-form-field appearance="fill">
+                <input matInput type="password" placeholder="Password" name="password" required minlength="6">
+            </mat-form-field><br/>
+            <button class="button" mat-raised-button type="submit" [disabled]="loginform.invalid">Submit</button>
+
+        </form>
+    </mat-card>
+</div>

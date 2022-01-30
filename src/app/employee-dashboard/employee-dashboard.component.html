@@ -1,0 +1,46 @@
+<div class="dropdown">
+    <button class="dropbtn"> {{employee.firstName}} {{employee.lastName}}  <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        <div class="dropdown-menu dropdown-menu-right show" style="width: 280px; background-color: rgba(124, 122, 122, 0.9);" aria-labelledby="bd-versions">
+
+            <a class="modalMyDetail" data-toggle="modal" data-target="#myDetail" data-src="MyDetails.aspx" style="display: block; width: 100%; padding: .25rem 1.5rem; clear: both; font-weight: 400; color: #00060c; text-align: inherit; background-color: transparent; border: 0;"><i class="fa fa-user"></i>My Details</a>
+            <div class="dropdown-divider"></div>
+            <a id="btnWebTour" class="dropdown-item" data-toggle="modal">TechM ID : {{employee.techmid}}</a>
+            <div class="dropdown-divider"></div>
+            <a id="modalHelp" class="dropdown-item" data-toggle="modal" data-target="#helpDiv">Role : {{employee.role.role}}</a>
+
+            <div class="dropdown-divider" style="margin: 3px 0;"></div>
+            <a href="https://timesheet.techmahindra.com/#" class="dropdown-item" data-toggle="modal" data-target="#changeTheme" data-src="">Upadate Timesheet</a>
+            <div class="dropdown-divider" *ngIf="isManagerIn()"></div>
+            <div *ngIf="isManagerIn()">
+                <input (change)="onChangeFile($event)" class="btn btn-outline-dark" type="file">
+                <br>
+                <br>
+                <button (click)="handleSendFile()" class="btn btn-outline-success">Send file</button>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button (click)="logout()" class="btn btn-danger">Sign Out</button>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <br>
+    <br>
+    <div>
+        <div style="color:white;background-color: rgba(0, 0, 0, 0.6) ;font-family: Trebuchet MS;
+                font-size: 19px; padding-left: 1x;">
+            <div style="padding-left: 10px;">
+                <h2>Reportee Details</h2>
+            </div>
+            <div class="ag-grid">
+                <ag-grid-angular style="width:1340px; height: 230px;margin-left: 12.5px ;text-decoration-color: aliceblue;background-color: rgba(0, 0, 0, 0); opacity: 0.8;font-family: sans-serif;" class="ag-theme-balham" [columnDefs]="columnDefs" [rowData]="rowData"
+                    [columnDefs]="columnDefs" rowSelection="multiple">
+                </ag-grid-angular>
+            </div>
+        </div>
+    </div>
+    <button (click)="putemp()" class="btn btn-success" style="float: right; margin-right: 30px; margin: 10px;">Save & Update</button>
+</div>

@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-balham.css";
+.form-group label {
+    color: rgb(53, 51, 51);
+}
+
+.form-group input {
+    font-weight: 500;
+}
+
+.form-group input::placeholder {
+    color: #c0bdbd;
+    font-weight: 200;
+    font-size: medium;
+}
+
+thead th {
+    font-weight: 400;
+}
+
+input.invalid {
+    border-color: red;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.bg-dark {
+    --bs-bg-opacity: 0.6;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: url(https://files.techmahindra.com/static/img/consulting-and-transformation-services-thumbnail.png);
+}
