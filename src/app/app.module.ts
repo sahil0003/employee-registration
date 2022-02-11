@@ -16,12 +16,17 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridModule, EditService, ToolbarService, SortService } from '@syncfusion/ej2-angular-grids';
 
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { EmployeeSSOComponent } from './employee-sso/employee-sso/employee-sso.component';
+import { ActionsComponent } from './actions/actions.component';
+import { CertificationRendererComponent } from './Renderer/certification-renderer/certification-renderer.component';
+import { EmployeeDetailsService } from './shared/employee-details.service';
+
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
@@ -33,6 +38,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 const routes: Routes=[
   {path:"", redirectTo:'employee-sso',pathMatch:'full'},
+  {path:'action', component:ActionsComponent},
   {path:'login', component:EmployeeLoginComponent},
   {path:"employee-sso", component:EmployeeSSOComponent},
  /* {path:'registration',component:EmployeeDetailsComponent , data:{roles: "Admin"}},*/
@@ -43,7 +49,9 @@ const routes: Routes=[
     AppComponent,
     EmployeeLoginComponent,
     EmployeeDashboardComponent,
-    EmployeeSSOComponent
+    EmployeeSSOComponent,
+    ActionsComponent,
+    CertificationRendererComponent
   ],
   imports: [
     BrowserModule,
@@ -58,19 +66,24 @@ const routes: Routes=[
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
-    AgGridModule.withComponents([]),
+    MatSidenavModule,
+    AgGridModule.withComponents([CertificationRendererComponent]),
     GridModule,
-    MsalModule
+    MsalModule,
   ],
  
   exports:[RouterModule], 
   providers: [
     {
       provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
+      useFactory: MSALInstanceFactory,
     },
-    MsalService
+    MsalService,
+    EmployeeDetailsService
+    
+
   ],
-  bootstrap: [AppComponent]
+  
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

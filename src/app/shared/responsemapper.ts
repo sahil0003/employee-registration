@@ -2,15 +2,24 @@
 import { role } from "./role.model";
 
 export class getResponse{
+    id:any;
     techmid: any;
-    firstName: string = '';
-    lastName: string = '';
-    email:string='';
-    certification:string=';'
-    role: any ;
-    role_id :any;
-    project:string='';
-    mgrid: string='';  
+    firstName: any;
+    lastName: any;
+    email:any;
+    certification:any;
+    cust_group_name: any ;
+    job_code_des :any;
+    project:any;
+    mgrid: any;  
     hyperscaler: any;
-    ibu: String =''
+    ibu: any;
+    ibg:any;
+    psoWork:any;
+    skills:any;
+    workinOnCloud:any;
+    resigned:any
+
 }
+
+

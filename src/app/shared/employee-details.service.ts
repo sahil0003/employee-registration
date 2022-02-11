@@ -21,25 +21,22 @@ export class EmployeeDetailsService {
   
   constructor(private _http: HttpClient, private router: Router, private authService: MsalService) { }
   formData:EmployeeDetails = new EmployeeDetails(); 
-  responsebody: getResponse = new getResponse();
+  responsebody: any = new getResponse();
   
-  postEmployeeDetails(){
-    return this.http.post('http://localhost:8080/api/employees/emp',this.formData).subscribe(res=>{alert("Registration Successfull"
-    )});
-  }
-  putEmployeeDetails(bodydata: any){
-    return this.http.put('http://localhost:8080/api/employees/emp/bulk',bodydata);
-  }
   getempdetails(id=this.formData.techmid){
     return this.http.get<any>('http://localhost:8080/api/employees/emp/'+id)
     .subscribe(data => {this.responsebody = data
+
       if (this.responsebody){
-        console.log(data);
+        console.log(this.formData.techmid);
+
         this.router.navigate(['employee-dashboard']);
       }
       else{
-        alert("Login Success Failled")
+        alert("Login Failed")
       }
     })   
   }
+ 
+ 
 }

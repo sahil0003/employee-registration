@@ -1,6 +1,4 @@
-<div fxLayoutAlign="center center" fxFlexFill class="main-div">
-
-</div>
+v
 <div class="center">
     <div class="title">
         <h1 class="cp-title">Tech Mahindra Cloud Services</h1>
@@ -16,6 +14,7 @@
         <form class="d-flex">
 
             <button (click)="login()" class="btn btn-primary btn-lg" *ngIf="!isLoggedIn()">TechM SSO SIGN IN</button>
+            <button (click)="logout()" class="btn btn-primary btn-lg" *ngIf="isLoggedIn()">logout</button>
         </form>
     </div>
 </div>

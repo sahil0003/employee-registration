@@ -36,4 +36,6 @@
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
+    left: 20px;
+    line-height: 0.95;
 }

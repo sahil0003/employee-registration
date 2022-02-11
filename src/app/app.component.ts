@@ -8,6 +8,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { getResponse } from './shared/responsemapper';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class AppComponent implements OnInit {
   title = 'employee-registration';
-  constructor(private authService: MsalService, private router: Router) {
+  constructor( private authService: MsalService, private router: Router,private _http: HttpClient)  {
 
   }
   ngOnInit(): void {
@@ -26,7 +28,9 @@ export class AppComponent implements OnInit {
         this.router.navigate(['login'])
       }
     })
+ 
   }
+ 
 
   isLoggedIn(): boolean {
   

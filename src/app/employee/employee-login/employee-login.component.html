@@ -1,5 +1,5 @@
 <div fxLayoutAlign="center center" fxFlexFill class="main-div">
-    <mat-card fxFlex="25" style="background-color: rgba(0, 0, 0, 0.1); ">
+    <mat-card style="margin-top: 100px;width: 300px; background-color: rgba(0, 0, 0, 0.1); ">
         <div style="border-radius: 5px; padding: 10px 15px;">
             <h2 class="title1"> EMS Login</h2>
         </div>
@@ -14,7 +14,7 @@
             </mat-form-field><br/>
 
             <mat-form-field appearance="fill">
-                <input matInput type="password" placeholder="Password" name="password" required minlength="6">
+                <input matInput type="password" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="service.formData.password" required minlength="6">
             </mat-form-field><br/>
             <button class="button" mat-raised-button type="submit" [disabled]="loginform.invalid">Submit</button>
 

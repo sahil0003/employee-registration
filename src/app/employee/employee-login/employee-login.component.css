@@ -9,6 +9,11 @@
     background: rgb(20 17 17 / 90%);
 }
 
+.main {
+    margin-left: 200px;
+    /* Same as the width of the sidenav */
+}
+
 ::placeholder {
     color: aquamarine;
 }

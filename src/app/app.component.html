@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark">
+<!--<nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img class="logo" src="https://files.techmahindra.com/static/img/brandkit/logo/TechM-Tagline-original.png" alt="" width="230" height="83" />
@@ -6,5 +6,49 @@
     </div>
 </nav>
 
-<router-outlet>
-</router-outlet>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+        <main>
+          
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>-->
+
+
+<div>
+
+    <div class="toolbar" id="vertical" role="banner">
+
+        <img width="80" alt="TechMahindra Logo" src="https://files.techmahindra.com/static/img/brandkit/logo/TechM-Tagline-original.png" />
+        <div class="center1" style="    font-size: 23px;  margin-left: 27%;">Employee Certification & Deployment</div>
+        <div class="spacer"></div>
+
+    </div>
+    <div *ngIf="isLoggedIn()">
+        <div class="sidenav" style="width: 200px; background-color:  #050c14; color: white;">
+            <Div class="sidenav_Container">
+                <a href="employee-dashboard" style="font-size: 18px;color: white;  ">Team Details</a>
+            </Div>
+            <div class="dropdown-divider"></div>
+            <div class="sidenav_Container">
+                <a href="action" style="font-size: 16px; color: white; ">Upload Team Details</a>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="sidenav_Container">
+                <a href="#" style="font-size: 18px; color: white;">Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="view content-topic flex-center">
+
+    <main style="width: -webkit-fill-available; height: -webkit-fill-available;">
+        <router-outlet></router-outlet>
+    </main>
+</div>

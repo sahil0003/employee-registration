@@ -1,3 +1,173 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
 body {
     background-image: url(https://files.techmahindra.com/static/img/consulting-and-transformation-services-thumbnail.png);
+}
+
+.main-div {
+    background-color: black;
+    opacity: 0.6;
+}
+
+.cp-title {
+    padding-top: 50px;
+    font-size: 60px;
+    color: aliceblue;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cp-sub {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 30px;
+    color: antiquewhite;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+.linkBtn {
+    font-size: 20px;
+    color: rgb(126, 123, 118);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 20px;
+}
+
+:host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 8px 0;
+}
+
+p {
+    margin: 0;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #0f1318;
+    color: white;
+    font-weight: 600;
+}
+
+.toolbar img {
+    margin: 0 16px;
+}
+
+.toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 8px;
+}
+
+.toolbar #youtube-logo {
+    height: 40px;
+    margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover,
+.toolbar #youtube-logo:hover {
+    opacity: 0.8;
+}
+
+
+/* Sidenav*/
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    background-color: #111;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #444343;
+    display: block;
+    border: #f1f1f1;
+    background: scroll;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    background-color: rgb(26, 25, 25);
+    border-radius: 8px;
+    border: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px;
+    /* Same as the width of the sidenav */
+}
+
+.sidenav_Container:hover {
+    border: #f1f1f1;
+    border-color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 15px;
+    }
+}
+
+.content-topic {
+    background: rgba(2, 2, 2, 0);
+    flex-grow: 1;
+    margin-left: 200px;
+    margin-top: 60px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(0, 0, 0, .25);
+    text-align: center;
 }

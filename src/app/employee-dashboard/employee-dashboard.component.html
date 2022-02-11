@@ -1,46 +1,95 @@
 <div class="dropdown">
-    <button class="dropbtn"> {{employee.firstName}} {{employee.lastName}}  <i class="fa fa-caret-down"></i>
-    </button>
+    <button class="dropbtn" style="background-color: rgb(26, 1, 29); font-weight: 400;
+    font-size: 18px;">  {{responsebody.firstName}} {{responsebody.lastName}} <i class="fa fa-caret-down"></i>
+</button>
+
+
     <div class="dropdown-content">
-        <div class="dropdown-menu dropdown-menu-right show" style="width: 280px; background-color: rgba(124, 122, 122, 0.9);" aria-labelledby="bd-versions">
 
-            <a class="modalMyDetail" data-toggle="modal" data-target="#myDetail" data-src="MyDetails.aspx" style="display: block; width: 100%; padding: .25rem 1.5rem; clear: both; font-weight: 400; color: #00060c; text-align: inherit; background-color: transparent; border: 0;"><i class="fa fa-user"></i>My Details</a>
-            <div class="dropdown-divider"></div>
-            <a id="btnWebTour" class="dropdown-item" data-toggle="modal">TechM ID : {{employee.techmid}}</a>
-            <div class="dropdown-divider"></div>
-            <a id="modalHelp" class="dropdown-item" data-toggle="modal" data-target="#helpDiv">Role : {{employee.role.role}}</a>
+        <div class="dropdown-menu show" style="width: auto; background-color: rgba(12, 1, 17, 0.98); color: white;     " aria-labelledby="navbarDropdown">
 
-            <div class="dropdown-divider" style="margin: 3px 0;"></div>
-            <a href="https://timesheet.techmahindra.com/#" class="dropdown-item" data-toggle="modal" data-target="#changeTheme" data-src="">Upadate Timesheet</a>
-            <div class="dropdown-divider" *ngIf="isManagerIn()"></div>
-            <div *ngIf="isManagerIn()">
-                <input (change)="onChangeFile($event)" class="btn btn-outline-dark" type="file">
-                <br>
-                <br>
-                <button (click)="handleSendFile()" class="btn btn-outline-success">Send file</button>
-            </div>
+
+            <a id="btnWebTour" class="dropdown-item" data-toggle="modal">Employee ID : {{responsebody.techmid}}</a>
             <div class="dropdown-divider"></div>
-            <button (click)="logout()" class="btn btn-danger">Sign Out</button>
+            <a id="btnWebTour" class="dropdown-item" data-toggle="modal">Job Description : {{responsebody.job_code_des}}</a>
+            <div class="dropdown-divider"></div>
+            <button (click)="logout()" class="btn btn-danger" style="
+            margin-left: 20px;">Sign Out</button>
+
         </div>
-
     </div>
 </div>
-
-<div>
-    <br>
-    <br>
+<div class="main">
     <div>
-        <div style="color:white;background-color: rgba(0, 0, 0, 0.6) ;font-family: Trebuchet MS;
-                font-size: 19px; padding-left: 1x;">
-            <div style="padding-left: 10px;">
-                <h2>Reportee Details</h2>
+        <div style="color:white;background-color: rgba(0, 0, 0, 0.6) ;font-family: Trebuchet MS; font-size: 19px; padding-left: 1x; ">
+            <div style="padding-left: 10px; padding-top: 10px;">
+                <h2>Reportee Details </h2>
             </div>
-            <div class="ag-grid">
-                <ag-grid-angular style="width:1340px; height: 230px;margin-left: 12.5px ;text-decoration-color: aliceblue;background-color: rgba(0, 0, 0, 0); opacity: 0.8;font-family: sans-serif;" class="ag-theme-balham" [columnDefs]="columnDefs" [rowData]="rowData"
-                    [columnDefs]="columnDefs" rowSelection="multiple">
+            <div class="ag-grid-d ">
+                <ag-grid-angular #myGrid style=" height: 450px;margin-left: 10px; margin-right: 10px;
+            text-decoration-color: aliceblue; 
+            font-family: sans-serif; " class="ag-theme-balham " [columnDefs]="columnDefs
+                " [rowData]="rowData " [columnDefs]="columnDefs " rowSelection='multiple' [frameworkComponents]='frameworkComponents' (gridReady)="onGridReady($event)" [pagination]="true" [paginationPageSize]="15">
+
                 </ag-grid-angular>
             </div>
+
+            <button (click)="putemp() " class="btn btn-success " style="float: right; margin-right: 30px; margin: 10px; ">Save & Update</button>
+            <button (click)=" myGrid.api.exportDataAsCsv()" class="btn btn-success " style="float: right; margin-right: 70px; margin: 10px; ">Download</button>
+            <button (click)="getRowData()" class="btn btn-success " style="float: right; margin-right: 1100px; margin: 10px; "> <h4>Row data from button 1: </h4>
+        <pre>{{responsebody1 | json}}</pre></button>
+
         </div>
     </div>
-    <button (click)="putemp()" class="btn btn-success" style="float: right; margin-right: 30px; margin: 10px;">Save & Update</button>
 </div>
+
+<!-- /*(cellClicked)="onCellClicked($event)"*/-->
+
+<!--<div class="dropdown">
+        <button class="dropbtn">  {{employee.firstName}} {{employee.lastName}} <i class="fa fa-caret-down"></i>
+    </button>
+
+      <div class="dropdown-content">
+
+            <div class="dropdown-menu show" style="width: 250px; background-color: rgba(124, 122, 122, 0.9);" aria-labelledby="navbarDropdown">
+
+                <a class="modalMyDetail" data-toggle="modal" data-target="#myDetail" data-src="MyDetails.aspx"><i class="fa fa-user"></i>My Details</a>
+                <div class="dropdown-divider"></div>
+                <a id="btnWebTour" class="dropdown-item" data-toggle="modal">TechM ID : {{employee.techmid}}</a>
+                <div class="dropdown-divider"></div>
+                <a id="modalHelp" class="dropdown-item" data-toggle="modal" data-target="#helpDiv">Role : {{employee.role.role}}</a>
+
+                <div class="dropdown-divider" style="margin: 3px 0;"></div>
+                <a href="https://timesheet.techmahindra.com/#" class="dropdown-item" data-toggle="modal" data-target="#changeTheme" data-src="">Upadate Timesheet</a>
+                <div class="dropdown-divider"></div>
+                <button (click)="logout()" class="btn btn-danger" style="
+            margin-left: 20px;">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf=" isManagerIn() ">
+        <div class=" dropdown1 ">
+            <button class="dropbtn1 "> Action <i class="fa fa-caret-down "></i>
+        </button>
+            <div class="dropdown1-content " style=" text-align: center;">
+                <div class="dropdown-menu  show " style="width: 280px; background-color: rgba(124, 122, 122, 0.9); " aria-labelledby="bd-versions ">
+
+                    <label style=" text-align: center; margin-left: 10px;"> Upload Emp Details</label>
+                    <div class="dropdown-divider"></div>
+                    <div class="upload-btn-wrapper">
+                        <button (change)="onChangeFile($event)" class="btnn" style="margin-left: 5px;width: 150px;">Browse</button>
+                        <input (change)="onChangeFile($event)" accept=".csv" style="width: 277px; border-radius: 10px;" class="btn btn-outline-light" type="file">
+                    </div>
+                    <br>
+                    <button (click)="handleSendFile()" class="btn btn-success" style="margin-left: 7px;width: 150px;">Upload</button>
+                    <div class="dropdown-divider"></div>
+                    <button (click)="myGrid.api.exportDataAsCsv({fileName: 'Employee Data'})" class="btn btn-success" style="width: 150px;
+                     margin-left: 10px;">Download Data</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>-->
