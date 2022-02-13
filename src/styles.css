@@ -62,7 +62,8 @@ body {
 /*for black theme*/
 
 .ag-theme-balham [class^=ag-] {
-    background-color: initial;
+    /*
+    background-color: initial;*/
 }
 
 .ag-header:hover {
@@ -79,8 +80,8 @@ body {
     border-right-width: 1px;
     border-right-color: rgba(43, 18, 18, 0.226);
     border-bottom-color: rgba(34, 3, 3, 0.226);
-    background-color: #0b171a;
-    color: #eee;
+    /* background-color: #0b171a;
+    color: #eee;*/
 }
 
 .ag-theme-balham .ag-ltr .ag-cell:hover {

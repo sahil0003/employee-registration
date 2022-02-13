@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from "@angular/router";
 
 import { EmployeeLoginComponent } from './employee/employee-login/employee-login.component';
-import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
+import { EmployeeDashboardComponent } from './employee/employee-login/employee-dashboard/employee-dashboard.component';
 import { EmployeeDetails } from './shared/employee-details.model';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -23,9 +23,10 @@ import { GridModule, EditService, ToolbarService, SortService } from '@syncfusio
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { EmployeeSSOComponent } from './employee-sso/employee-sso/employee-sso.component';
-import { ActionsComponent } from './actions/actions.component';
+import { ActionsComponent } from './employee/employee-login/employee-dashboard/actions/actions.component';
 import { CertificationRendererComponent } from './Renderer/certification-renderer/certification-renderer.component';
 import { EmployeeDetailsService } from './shared/employee-details.service';
+import { MatDialog } from '@angular/material/dialog';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -70,6 +71,8 @@ const routes: Routes=[
     AgGridModule.withComponents([CertificationRendererComponent]),
     GridModule,
     MsalModule,
+   
+
   ],
  
   exports:[RouterModule], 

@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { getResponse } from './shared/responsemapper';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { EmployeeDetails } from './shared/employee-details.model';
+import { EmployeeDetailsService } from './shared/employee-details.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +21,9 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   title = 'employee-registration';
-  constructor( private authService: MsalService, private router: Router,private _http: HttpClient)  {
+
+  constructor(private authService: MsalService, private router: Router,private _http: HttpClient )  {
+    
 
   }
   ngOnInit(): void {
@@ -47,5 +52,25 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.logout()
   }
+
   
+  responsebody: any = new getResponse();
+  rowData:any;
+ 
+  formData : EmployeeDetails = new EmployeeDetails();
+  getempdetails(){
+   
+    return this._http.get<any>('http://localhost:8080/api/employees/emp/'+this.formData.techmid)
+    .subscribe(data => {this.responsebody = data
+
+      if (this.responsebody){
+        console.log(this.formData.techmid);
+
+        this.router.navigate(['employee-dashboard']);
+      }
+      else{
+        alert("Login Failed")
+      }
+    })   
+  }
 }

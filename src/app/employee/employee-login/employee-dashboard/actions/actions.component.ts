@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject, Injectable  } from '@angular/core';
 import AWSS3UploadAshClient from 'aws-s3-upload-ash';
 import { UploadResponse } from 'aws-s3-upload-ash/dist/types';
 import { environment } from 'src/environments/environment';
-import { EmployeeDashboardComponent } from '../employee-dashboard/employee-dashboard.component';
+import { EmployeeDashboardComponent } from '../employee-dashboard.component';
+import { EmployeeDetailsService } from '../../../../shared/employee-details.service';
 
 @Component({
   selector: 'app-actions',
@@ -11,8 +12,12 @@ import { EmployeeDashboardComponent } from '../employee-dashboard/employee-dashb
 })
 export class ActionsComponent implements OnInit {
 
-  constructor() { }
-
+  formData:any
+  constructor( ) {
+  }
+ 
+ 
+ 
   ngOnInit(): void {}
   private dash: EmployeeDashboardComponent
  
@@ -41,7 +46,9 @@ export class ActionsComponent implements OnInit {
       .uploadFile(this.fileSelected, this.fileSelected.type, undefined, this.fileSelected.name, "private")
       .then((data: UploadResponse) => alert("File Uploaded Successfully"))
       .catch((err: any) => alert(err))
-      this.dash.getEmployeeDetails()
+     /* this.dash.getEmployeeDetails(this.formData.techmid)*/
   }
+
+
 
 }

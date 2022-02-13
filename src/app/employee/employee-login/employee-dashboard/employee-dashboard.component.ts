@@ -1,21 +1,22 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalModule, MsalService } from '@azure/msal-angular';
 import { IEditCell } from '@syncfusion/ej2-angular-grids';
 import { map } from 'rxjs';
-import { EmployeeDetails } from '../shared/employee-details.model';
-import { EmployeeDetailsService } from '../shared/employee-details.service';
-import { EmployeeDetailsDashboard } from '../shared/EmployeeDetailsDashboard';
-import { getResponse } from '../shared/responsemapper';
-import { role } from '../shared/role.model';
+import { EmployeeDetails } from '../../../shared/employee-details.model';
+import { EmployeeDetailsService } from '../../../shared/employee-details.service';
+import { EmployeeDetailsDashboard } from '../../../shared/EmployeeDetailsDashboard';
+import { getResponse } from '../../../shared/responsemapper';
+import { role } from '../../../shared/role.model';
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import AWSS3UploadAshClient from 'aws-s3-upload-ash';
 import { UploadResponse } from 'aws-s3-upload-ash/dist/types';
 import { environment } from 'src/environments/environment';
-import { AppComponent } from '../app.component';
+import { AppComponent } from '../../../app.component';
 import { Grid , GridOptions, GridApi,GridParams, GridOptionsWrapper, CellClickedEvent } from 'ag-grid-community';
-import { CertificationRendererComponent } from '../Renderer/certification-renderer/certification-renderer.component';
+import { CertificationRendererComponent } from '../../../Renderer/certification-renderer/certification-renderer.component';
+
 
 
 @Component({
@@ -23,6 +24,8 @@ import { CertificationRendererComponent } from '../Renderer/certification-render
   templateUrl: './employee-dashboard.component.html',
   styleUrls: ['./employee-dashboard.component.css']
 })
+
+
 export class EmployeeDashboardComponent implements OnInit {
   private gridApi: any;
   gridColumnApi:any; 
@@ -35,18 +38,19 @@ export class EmployeeDashboardComponent implements OnInit {
   rowDataClicked1 = {};
   label:any
   formData:any ;
-  
+  $: any;
  
-  constructor(private empservice: EmployeeDetailsService ,private http: HttpClient, private router: Router, private authService: MsalService) {    
+  constructor( private empservice: EmployeeDetailsService , private http: HttpClient, private router: Router, private authService: MsalService) {    
     this.frameworkComponents = {
       certificationRendererComponent: CertificationRendererComponent,
     }
     this.formData = empservice.formData 
+ 
   }
  
  
   ngOnInit() 
-  {this.getEmployeeDetails1(this.formData.techmid), 
+  { this.getEmployeeDetails1(this.formData.techmid), 
     this.getEmployeeDetails(this.formData.techmid),
     this.getRowData()
   }
@@ -59,8 +63,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
   getEmployeeDetails1(id=this.formData.techmid){ return this.http.get<any>('http://localhost:8080/api/employees/emp/'+id)
   .subscribe(data => {this.responsebody = data
-    localStorage.setItem(this.formData,this.responsebody)
-    console.log(localStorage.getItem(this.formData.techmid) )
+    console.log(this.formData.techmid)
   })}
 
     /*onCellClicked(event: CellClickedEvent) { 
@@ -71,9 +74,13 @@ export class EmployeeDashboardComponent implements OnInit {
  putemp(data=this.rowData){
     this.http.put('http://localhost:8080/api/employees/emp',data);
   }
-  onClick (){
-    this.putemp()
-  } 
+
+  uploadData(data=this.rowData){
+    this.http.put('http://localhost:8080/api/employees/emp',data).subscribe(data => {this.responsebody = data
+    console.log(this.formData.techmid)
+  })
+  }
+
   
   logout() {
     this.authService.logout()
@@ -104,7 +111,7 @@ export class EmployeeDashboardComponent implements OnInit {
       .uploadFile(this.fileSelected, this.fileSelected.type, undefined, this.fileSelected.name, "private")
       .then((data: UploadResponse) => alert("File Uploaded Successfully"))
       .catch((err: any) => alert(err))
-      this.getEmployeeDetails()
+      this.getEmployeeDetails(this.formData.techmid)
   }
 
 
@@ -113,32 +120,56 @@ export class EmployeeDashboardComponent implements OnInit {
 columnDefs = [
   {headerName: 'TechM ID', field: 'techmid', sortable: true,width:130,filter:true,colId:'techmid',
    checkboxSelection:true,headerCheckboxSelection:true},
+
   {headerName: 'First Name', field: 'first_NAME',sortable: true,width:120,filter:true, },
+
   {headerName: 'Last Name', field: 'last_NAME',sortable: true,width:120,filter:true},
+
+  {headerName: 'Employee IBU', field: 'employee_ibu',sortable: true,width:130,filter:true},
+
   {headerName: 'Project', field: 'project',sortable: true,width:100,filter:true},
-  {headerName: 'HyperScaler', field: 'hyperscaler',cellClass: "editable",sortable: true,editable:true,width:140,
-  filter:true, cellEditor:'agSelectCellEditor', cellEditorParams: { values: ['AWS','AZURE','GCP','Oracle','IBM']}},
-  {headerName: 'Working On Cloud', field: 'workinOnCloud',
-    cellClass: ['editable'] ,sortable: true,editable:true,width:150,filter:true,
+
+  {headerName: 'Primary Competency', field: 'primary_competency',
+  cellClass: ['editable'] ,sortable: true,editable:true,width:180,filter:true,
+  cellEditor:'agSelectCellEditor', cellEditorParams: { values: ['ADMS','Infra','Security','SAP','Oracle Apps','Network Services','IOT','Data Analytics'],} },
+ 
+  {headerName: 'Working On Cloud Scope', field: 'workinOnCloud',
+    cellClass: ['editable'] ,sortable: true,editable:true,width:180,filter:true,
     cellEditor:'agSelectCellEditor', cellEditorParams: { values: ['Yes','No'],} },
+
+  {headerName: 'HyperScaler', field: 'hyperscaler',cellClass: "editable",sortable: true,editable:true,width:180,
+  filter:true, cellEditor:'agSelectCellEditor', cellEditorParams: { values: ['AWS','AZURE','GCP','Oracle','IBM']}},
+
+  
   {headerName: 'Primary Scope Of Work', field: 'psoWork',
-    cellClass: ['editable'] ,sortable: true,editable:true,width:150,filter:true,
-    cellEditor:'agSelectCellEditor', cellEditorParams: {values: ['Devops','Developer','Security'],}},
+    cellClass: ['editable'] ,sortable: true,editable:true,width:180,filter:true,
+    cellEditor:'agSelectCellEditor', cellEditorParams: {values: ['Devops','Developer',''],}},
+  
   {headerName: 'Cloud Certifification', field: 'certified', colId: 'certificationdata', sortable: true,width:200,filter:true, },    
-  {headerName: 'Resigned',  cellRenderer: 'certificationRendererComponent' ,width:130,
-    cellRendererParams: { onClick: this.onBtnClick1.bind(this), label: 'certified'}},
+  /*
+  {headerName: 'Certifications',  cellRenderer: 'certificationRendererComponent' ,width:130,
+    cellRendererParams: { onClick: this.onBtnClick1.bind(this), label: 'certified'}},*/
+  
   {headerName: 'Job Code Description', field: 'job_CODE_DES',sortable: true,width:150,filter:true},
+  
   {headerName: 'Customer Group Name', field: 'cust_GROUP_NAME',sortable: true,width:150,filter:true},
+  
   {headerName: 'Skills', field: 'skills',sortable: true,width:150,filter:true},
+  
   {headerName: 'IBU', field: 'ibu',sortable: true,filter:true,width:70},
+  
   {headerName: 'IBG', field: 'ibg',sortable: true,filter:true,width:70},
+  
   {headerName: 'Email', field: 'email',filter:true,width: 155,},
+  
   {headerName: 'Resigned', field: 'resigned',sortable: true,filter:true,width:130,},
+  /*
   {headerName: 'Button Col 1',  cellRenderer: 'certificationRendererComponent',
     cellRendererParams: { onClick: this.onBtnClick1.bind(this), label: 'Click 1'}
-  },
-
+  }*/
+ 
 ];
+onRowClicked(event: any) {this.$("#imagemodal").modal("show");}
   defaultColDef = {
   };
 
