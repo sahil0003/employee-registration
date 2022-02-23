@@ -22,7 +22,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AppComponent implements OnInit {
   title = 'employee-registration';
 
-  constructor(private authService: MsalService, private router: Router,private _http: HttpClient )  {
+  constructor(private authService: MsalService, public router: Router,private _http: HttpClient )  {
     
 
   }

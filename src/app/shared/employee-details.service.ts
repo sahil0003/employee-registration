@@ -31,9 +31,11 @@ export class EmployeeDetailsService {
         console.log(this.formData.techmid);
 
         this.router.navigate(['employee-dashboard']);
+       
       }
       else{
         alert("Login Failed")
+     
       }
     })   
   }

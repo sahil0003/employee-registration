@@ -21,8 +21,8 @@
         <div class="center1" style="    font-size: 23px;  margin-left: 27%;">Employee Certification & Deployment</div>
         <div class="spacer"></div>
     </div>
-    <div *ngIf="isLoggedIn()">
-        <div class="sidenav" style="width: 200px; background-color:  #050c14; color: white;">
+    <div>
+        <div class="sidenav" *ngIf="router.url !== '/login'" style="width: 200px; background-color:  #050c14; color: white;">
             <Div class="sidenav_Container">
                 <a routerLink="employee-dashboard" style="font-size: 18px;color: white;  ">Team Details</a>
             </Div>

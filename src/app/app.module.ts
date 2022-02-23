@@ -22,7 +22,6 @@ import { GridModule, EditService, ToolbarService, SortService } from '@syncfusio
 
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
-import { EmployeeSSOComponent } from './employee-sso/employee-sso/employee-sso.component';
 import { ActionsComponent } from './employee/employee-login/employee-dashboard/actions/actions.component';
 import { CertificationRendererComponent } from './Renderer/certification-renderer/certification-renderer.component';
 import { EmployeeDetailsService } from './shared/employee-details.service';
@@ -38,10 +37,9 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 }
 
 const routes: Routes=[
-  {path:"", redirectTo:'employee-sso',pathMatch:'full'},
+  {path:"", redirectTo:'login',pathMatch:'full'},
   {path:'action', component:ActionsComponent},
   {path:'login', component:EmployeeLoginComponent},
-  {path:"employee-sso", component:EmployeeSSOComponent},
  /* {path:'registration',component:EmployeeDetailsComponent , data:{roles: "Admin"}},*/
   {path:'employee-dashboard',component:EmployeeDashboardComponent} 
 ]
@@ -50,7 +48,6 @@ const routes: Routes=[
     AppComponent,
     EmployeeLoginComponent,
     EmployeeDashboardComponent,
-    EmployeeSSOComponent,
     ActionsComponent,
     CertificationRendererComponent
   ],
